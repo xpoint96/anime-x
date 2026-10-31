@@ -10,5 +10,3 @@ services:
         value: 3.11.9
       - key: SECRET_KEY
         generateValue: true
-      - key: VK_CLIENT_ID
-        sync: false

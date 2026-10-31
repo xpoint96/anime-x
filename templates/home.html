@@ -14,7 +14,6 @@
       <strong>{{ item.title }}</strong>
       <span>{{ item.updated }}</span>
     </div>
-    <em>{{ item.out }}<small>серия</small></em>
   </a>
   {% endfor %}
 </section>
@@ -42,7 +41,6 @@
     <h2>Рецензии</h2>
     {% for review in reviews[:4] %}
     <article class="review">
-      <p class="score">{{ review.score }}/10</p>
       <h3>{{ review.title }}</h3>
       <p>{{ review.text }}</p>
       <cite>{{ review.author }}</cite>

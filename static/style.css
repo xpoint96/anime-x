@@ -47,6 +47,28 @@ a {
   overflow: hidden;
 }
 
+.bg-photo {
+  position: absolute;
+  inset: 0;
+  background-position: center 18%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.85;
+}
+
+.bg-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7, 20, 12, 0.88) 0%,
+      rgba(7, 20, 12, 0.72) 28%,
+      rgba(7, 20, 12, 0.78) 55%,
+      rgba(7, 20, 12, 0.92) 100%
+    );
+}
+
 .grid {
   position: absolute;
   inset: -20%;
@@ -55,7 +77,7 @@ a {
     linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 48px 48px;
   animation: drift 28s linear infinite;
-  opacity: 0.35;
+  opacity: 0.18;
 }
 
 .orb {
@@ -108,9 +130,12 @@ a {
 main,
 .sheet,
 footer,
-.chat {
+.chat,
+.search,
+.tg,
+.flash {
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .top {
@@ -234,7 +259,7 @@ footer,
 }
 
 .hero {
-  padding: 0 6vw 28px;
+  padding: 36px 6vw 28px;
 }
 
 .kicker {
@@ -544,12 +569,12 @@ footer {
 .feed {
   display: grid;
   gap: 8px;
-  padding: 0 6vw 32px;
+  padding: 20px 6vw 32px;
 }
 
 .row {
   display: grid;
-  grid-template-columns: 52px 1fr auto;
+  grid-template-columns: 52px 1fr;
   gap: 12px;
   align-items: center;
   padding: 8px;
