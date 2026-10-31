@@ -1,0 +1,82 @@
+<div class="login-overlay" id="login-overlay" hidden>
+  <div class="login-modal" role="dialog" aria-modal="true" aria-labelledby="login-tab">
+    <div class="login-head">
+      <div class="login-tabs">
+        <button type="button" class="login-tab is-on" id="login-tab" data-pane="login">Войти</button>
+        <button type="button" class="login-tab" id="register-tab" data-pane="register">Регистрация</button>
+      </div>
+      <button type="button" class="login-close" id="login-close" aria-label="Закрыть">×</button>
+    </div>
+
+    <div class="login-pane is-on" data-pane="login">
+      <form method="post" action="{{ url_for('login') }}" class="login-form">
+        <label class="login-label" for="login_name">Логин:</label>
+        <div class="login-input">
+          <span class="login-ico" aria-hidden="true">👤</span>
+          <input type="text" name="name" id="login_name" placeholder="Ваш логин" required autocomplete="username" />
+        </div>
+
+        <div class="login-row">
+          <label class="login-label" for="login_password">Пароль:</label>
+          <a class="login-forgot" href="{{ url_for('login') }}?forgot=1">Забыли пароль?</a>
+        </div>
+        <div class="login-input">
+          <span class="login-ico" aria-hidden="true">🔒</span>
+          <input type="password" name="password" id="login_password" placeholder="Ваш пароль" required autocomplete="current-password" />
+        </div>
+
+        <label class="login-switch">
+          <input type="checkbox" name="no_remember" value="1" />
+          <span class="slider"></span>
+          <span>Не запоминать меня</span>
+        </label>
+
+        <button class="login-submit" type="submit">Войти на сайт</button>
+      </form>
+
+      <p class="login-or">или войти через</p>
+      <div class="login-social">
+        <form method="post" action="{{ url_for('auth_vk') }}">
+          <button class="soc soc-vk" type="submit" aria-label="VK">VK</button>
+        </form>
+        <form method="post" action="{{ url_for('auth_yandex') }}">
+          <button class="soc soc-ya" type="submit" aria-label="Яндекс">Я</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="login-pane" data-pane="register" hidden>
+      <form method="post" action="{{ url_for('register') }}" class="login-form">
+        <label class="login-label" for="reg_name">Логин:</label>
+        <div class="login-input">
+          <span class="login-ico" aria-hidden="true">👤</span>
+          <input type="text" name="name" id="reg_name" placeholder="Ваш логин" required minlength="3" autocomplete="username" />
+        </div>
+
+        <label class="login-label" for="reg_password">Пароль:</label>
+        <div class="login-input">
+          <span class="login-ico" aria-hidden="true">🔒</span>
+          <input type="password" name="password" id="reg_password" placeholder="Ваш пароль" required minlength="4" autocomplete="new-password" />
+        </div>
+
+        <label class="login-label" for="reg_password2">Повторите пароль:</label>
+        <div class="login-input">
+          <span class="login-ico" aria-hidden="true">🔒</span>
+          <input type="password" name="password2" id="reg_password2" placeholder="Ещё раз" required minlength="4" autocomplete="new-password" />
+        </div>
+
+        <button class="login-submit" type="submit">Зарегистрироваться</button>
+      </form>
+
+      <p class="login-or">или войти через</p>
+      <div class="login-social">
+        <form method="post" action="{{ url_for('auth_vk') }}">
+          <button class="soc soc-vk" type="submit" aria-label="VK">VK</button>
+        </form>
+        <form method="post" action="{{ url_for('auth_yandex') }}">
+          <button class="soc soc-ya" type="submit" aria-label="Яндекс">Я</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

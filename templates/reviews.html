@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Рецензии — anime x.{% endblock %}
+{% block content %}
+<h1>Рецензии</h1>
+<div class="review-list">
+  {% for review in reviews %}
+  <article class="review">
+    <p class="score">{{ review.score }}/10</p>
+    <h3><a href="{{ url_for('title_page', item_id=review.anime_id) }}">{{ review.title }}</a></h3>
+    <p>{{ review.text }}</p>
+    <cite>{{ review.author }}</cite>
+  </article>
+  {% endfor %}
+</div>
+{% endblock %}

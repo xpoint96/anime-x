@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}anime x. — новые серии{% endblock %}
+{% block content %}
+<section class="hero">
+  <p class="kicker">сезон 2026–2027</p>
+  <h1><span>новые</span> <span>серии</span> <span>аниме</span></h1>
+</section>
+
+<section class="feed">
+  {% for item in newest %}
+  <a class="row" href="{{ url_for('title_page', item_id=item.id) }}">
+    {% include "_poster.html" %}
+    <div>
+      <strong>{{ item.title }}</strong>
+      <span>{{ item.updated }}</span>
+    </div>
+    <em>{{ item.out }}<small>серия</small></em>
+  </a>
+  {% endfor %}
+</section>
+
+<section class="block">
+  <h2>Новые аниме на сайте</h2>
+  {% with items=fresh %}{% include "_cards.html" %}{% endwith %}
+  <p class="more"><a href="{{ url_for('catalog_page') }}">Весь каталог · {{ pages }} страниц</a></p>
+</section>
+
+<section class="block">
+  <h2>Подборки аниме</h2>
+  <div class="packs">
+    {% for pack in collections %}
+    <a class="pack" href="{{ url_for('collection_detail', slug=pack.slug) }}">
+      <h3>{{ pack.title }}</h3>
+      <p>{{ pack.text }}</p>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="split-home">
+  <div>
+    <h2>Рецензии</h2>
+    {% for review in reviews[:4] %}
+    <article class="review">
+      <p class="score">{{ review.score }}/10</p>
+      <h3>{{ review.title }}</h3>
+      <p>{{ review.text }}</p>
+      <cite>{{ review.author }}</cite>
+    </article>
+    {% endfor %}
+    <p class="more"><a href="{{ url_for('reviews_page') }}">Все рецензии</a></p>
+  </div>
+  <div>
+    <h2>Топ-10 за неделю</h2>
+    <ol class="top-list">
+      {% for item in top10 %}
+      <li>
+        <a href="{{ url_for('title_page', item_id=item.id) }}">
+          {% include "_poster.html" %}
+          <span>{{ item.title }}</span>
+          <b>{{ item.rating }}</b>
+        </a>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+{% endblock %}

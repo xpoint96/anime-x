@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}{{ heading }} — anime x.{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>{{ heading }}</h1>
+  <p class="lede">{{ meta.total }} тайтлов · страница {{ meta.page }} из {{ meta.pages }}</p>
+</section>
+
+<form class="panel" method="get">
+  <label>Жанр
+    <select name="genre">
+      <option value="все">все</option>
+      {% for genre in genres %}
+      <option value="{{ genre }}" {% if filters.genre == genre %}selected{% endif %}>{{ genre }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Исключить жанр
+    <select name="exclude">
+      <option value="нет">нет</option>
+      {% for genre in genres %}
+      <option value="{{ genre }}" {% if filters.exclude == genre %}selected{% endif %}>{{ genre }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Тип
+    <select name="kind">
+      {% for option in kinds %}
+      <option value="{{ option }}" {% if filters.kind == option %}selected{% endif %}>{{ option }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Сезон
+    <select name="season">
+      {% for option in seasons %}
+      <option value="{{ option }}" {% if filters.season == option %}selected{% endif %}>{{ option }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Статус
+    <select name="status">
+      {% for option in statuses %}
+      <option value="{{ option }}" {% if filters.status == option %}selected{% endif %}>{{ option }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Сортировка
+    <select name="sort">
+      {% for key, label in sorts.items() %}
+      <option value="{{ key }}" {% if filters.sort == key %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <input type="hidden" name="q" value="{{ filters.q }}" />
+  <button class="btn" type="submit">Применить</button>
+</form>
+
+{% include "_cards.html" %}
+{% include "_pager.html" %}
+{% endblock %}

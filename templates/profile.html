@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Профиль — anime x.{% endblock %}
+{% block content %}
+<section class="profile-box">
+  <p class="kicker">профиль</p>
+  <h1>{{ current_user['name'] }}</h1>
+  <p class="muted">
+    {% if current_user['vk_id'] and current_user['vk_id'].startswith('ya') %}
+      Вход через Яндекс
+    {% elif current_user['vk_id'] %}
+      Вход через VK
+    {% else %}
+      Вход по логину и паролю
+    {% endif %}
+  </p>
+  <p class="hint">Сейчас ты уже авторизован. Чтобы снова увидеть вход и регистрацию — выйди из профиля.</p>
+  <a class="login-submit profile-logout" href="{{ url_for('logout') }}">Выйти</a>
+</section>
+{% endblock %}

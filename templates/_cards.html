@@ -1,0 +1,16 @@
+<section class="grid-cards">
+  {% for item in items %}
+  <a class="card" href="{{ url_for('title_page', item_id=item.id) }}" style="--d: {{ (loop.index0 % 12) * 40 }}ms">
+    <div class="poster">
+      {% include "_poster.html" %}
+      <span class="shine"></span>
+      <span class="badge">{{ item.out }} из {{ item.episodes }}+</span>
+      <span class="score">★ {{ item.rating }}</span>
+    </div>
+    <h2>{{ item.title }}</h2>
+    <p>{{ item.year }} · {{ item.kind }} · {{ item.genre }}</p>
+  </a>
+  {% else %}
+  <p class="empty">Ничего не нашли. Сними исключение жанра или сбрось фильтр.</p>
+  {% endfor %}
+</section>

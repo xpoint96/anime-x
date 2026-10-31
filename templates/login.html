@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Войти — anime x.{% endblock %}
+{% block content %}
+<section class="auth-page">
+  <p class="auth-page-note">Открой вход через иконку профиля сверху — или заполни форму ниже.</p>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const open = document.getElementById("auth-open");
+    if (open) open.click();
+    {% if request.args.get('tab') == 'register' %}
+    document.getElementById("register-tab")?.click();
+    {% endif %}
+  });
+</script>
+{% endblock %}

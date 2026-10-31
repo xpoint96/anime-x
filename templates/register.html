@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Регистрация — anime x.{% endblock %}
+{% block content %}
+<section class="auth-page">
+  <p class="auth-page-note">Регистрация открывается в том же окне, что и вход.</p>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const open = document.getElementById("auth-open");
+    if (open) open.click();
+    document.getElementById("register-tab")?.click();
+  });
+</script>
+{% endblock %}

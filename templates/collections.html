@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Подборки — anime x.{% endblock %}
+{% block content %}
+<h1>Подборки аниме</h1>
+<p class="lede">В том числе фан-подборки. Без комментариев — только списки.</p>
+<div class="packs">
+  {% for pack in packs %}
+  <a class="pack" href="{{ url_for('collection_detail', slug=pack.slug) }}">
+    <h3>{{ pack.title }}</h3>
+    <p>{{ pack.text }}</p>
+    <span>{{ pack.items|length }} тайтлов</span>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

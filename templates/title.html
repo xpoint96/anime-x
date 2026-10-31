@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ item.title }} — anime x.{% endblock %}
+{% block content %}
+<article class="title-hero">
+  {% include "_poster.html" %}
+  <div>
+    <p class="kicker">{{ item.status }} · {{ item.tag }}</p>
+    <h1>{{ item.title }}</h1>
+    <p>{{ item.year }} · {{ item.kind }} · {{ item.genre }} · ★ {{ item.rating }}</p>
+    <p>{{ item.out }} из {{ item.episodes }} серий</p>
+    {% if item.synopsis %}<p class="synopsis">{{ item.synopsis }}</p>{% endif %}
+  </div>
+</article>
+<h2 class="block">Похожие</h2>
+{% with items=related %}{% include "_cards.html" %}{% endwith %}
+{% endblock %}

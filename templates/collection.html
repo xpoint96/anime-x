@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}{{ pack.title }} — anime x.{% endblock %}
+{% block content %}
+<p class="kicker">подборка</p>
+<h1>{{ pack.title }}</h1>
+<p class="lede">{{ pack.text }}</p>
+{% include "_cards.html" %}
+{% endblock %}

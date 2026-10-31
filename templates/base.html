@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}anime x.{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Zen+Kaku+Gothic+New:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <div class="bg" aria-hidden="true">
+      <span class="orb orb-a"></span>
+      <span class="orb orb-b"></span>
+      <span class="orb orb-c"></span>
+      <div class="grid"></div>
+      <div class="petals">
+        {% for i in range(14) %}<i style="--i: {{ i }}"></i>{% endfor %}
+      </div>
+    </div>
+
+    <header class="top">
+      <a class="brand" href="{{ url_for('home') }}">
+        <span class="mark">x</span>
+        <span class="word">anime <em>x.</em></span>
+      </a>
+      <div class="tools">
+        <button class="ghost" id="theme" type="button" aria-label="Тема">◐</button>
+        <button class="ghost" id="menu-btn" type="button" aria-label="Меню">☰</button>
+        {% if current_user %}
+        <a class="ghost" href="{{ url_for('profile') }}" aria-label="Профиль">👤</a>
+        {% else %}
+        <button class="ghost" id="auth-open" type="button" aria-label="Войти">👤</button>
+        {% endif %}
+      </div>
+    </header>
+
+    <nav class="sheet" id="sheet" hidden>
+      <a href="{{ url_for('home') }}">Главная</a>
+      <a href="{{ url_for('anonsy') }}">Анонсы</a>
+      <a href="{{ url_for('catalog_page') }}">Каталог</a>
+      <a href="{{ url_for('collections_page') }}">Подборки</a>
+      <a href="{{ url_for('reviews_page') }}">Рецензии</a>
+      <a href="{{ url_for('top_page') }}">Топ-10 за неделю</a>
+      {% if current_user %}
+      <a href="{{ url_for('profile') }}">Профиль</a>
+      <a href="{{ url_for('logout') }}">Выйти</a>
+      {% else %}
+      <a href="{{ url_for('login') }}">Войти</a>
+      <a href="{{ url_for('register') }}">Регистрация</a>
+      {% endif %}
+    </nav>
+
+    <form class="search" method="get" action="{{ url_for('catalog_page') }}">
+      <input type="search" name="q" value="{{ request.args.get('q', '') }}" placeholder="Поиск аниме" />
+      <button type="submit" aria-label="Искать">⌕</button>
+    </form>
+
+    <a class="tg" href="{{ telegram_url }}" target="_blank" rel="noreferrer">Мы в Telegram</a>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <ul class="flash">
+        {% for message in messages %}<li>{{ message }}</li>{% endfor %}
+      </ul>
+      {% endif %}
+    {% endwith %}
+
+    <main>{% block content %}{% endblock %}</main>
+    <footer><p>© 2026 anime x. · {{ catalog_total }} тайтлов · {{ catalog_pages }} страниц</p></footer>
+    {% if not current_user %}
+      {% include "_auth_modal.html" %}
+    {% endif %}
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>

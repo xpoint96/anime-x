@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Топ-10 за неделю — anime x.{% endblock %}
+{% block content %}
+<h1 class="block">Топ-10 за неделю</h1>
+<ol class="top-list big">
+  {% for item in top10 %}
+  <li>
+    <a href="{{ url_for('title_page', item_id=item.id) }}">
+      {% include "_poster.html" %}
+      <span>{{ loop.index }}. {{ item.title }}</span>
+      <b>{{ item.rating }}</b>
+    </a>
+  </li>
+  {% endfor %}
+</ol>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% if meta.pages > 1 %}
+<nav class="pager" aria-label="Страницы">
+  {% if meta.page > 1 %}
+  <a href="{{ catalog_url(meta.page - 1) }}">‹</a>
+  {% endif %}
+  {% for num in range(1, meta.pages + 1) %}
+    {% if num == 1 or num == meta.pages or (num >= meta.page - 2 and num <= meta.page + 2) %}
+    <a class="{% if num == meta.page %}on{% endif %}" href="{{ catalog_url(num) }}">{{ num }}</a>
+    {% elif num == meta.page - 3 or num == meta.page + 3 %}
+    <span>…</span>
+    {% endif %}
+  {% endfor %}
+  {% if meta.page < meta.pages %}
+  <a href="{{ catalog_url(meta.page + 1) }}">›</a>
+  {% endif %}
+</nav>
+{% endif %}
